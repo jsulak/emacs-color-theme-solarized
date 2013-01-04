@@ -202,7 +202,6 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (shadow ((t (,@fg-base01))))
              (trailing-whitespace ((t (,@fmt-revr ,@fg-red))))
              (vertical-border ((t (,@fg-base0))))
-             (which-func ((t (,@fg-base1 ,@bg-base02))))
              ;; comint
              (comint-highlight-prompt ((t (,@fg-blue))))
              ;; compilation
