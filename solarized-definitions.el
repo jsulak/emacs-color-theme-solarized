@@ -40,7 +40,10 @@ down in order to expand or compress the tonal range displayed."
   :options '(high normal low)
   :group 'solarized)
 
-(defcustom solarized-broken-srgb (if (eq system-type 'darwin) t nil)
+(defcustom solarized-broken-srgb (if (and (eq system-type 'darwin)
+                                          (eq window-system 'ns))
+                                     t
+                                   nil)
   "Emacs bug #8402 results in incorrect color handling on Macs. If this is t
 \(the default on Macs), Solarized works around it with alternative colors.
 However, these colors are not totally portable, so you may be able to edit
@@ -321,6 +324,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (org-started-kwd-face ((t (,@fg-yellow ,@bg-base03))))
              (org-cancelled-kwd-face ((t (,@fg-green ,@bg-base03))))
              (org-delegated-kwd-face ((t (,@fg-cyan ,@bg-base03))))
+             ;; table
+             (table-cell ((t (,@fmt-none ,@fg-base0 ,@bg-back))))
              ;; outline - pandocBlockQuoteLeader*
              (outline-1 ((t (,@fmt-none ,@fg-blue))))
              (outline-2 ((t (,@fmt-none ,@fg-cyan))))
@@ -343,7 +348,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (show-paren-mismatch ((t (,@fmt-bold ,@fg-red ,@bg-base01))))
              ;; widgets
              (widget-field
-              ((t (,@fg-base1 ,@bg-base02 :box (:line-width 1 :color ,base2)
+              ((t (,@fg-base1 ,@bg-base02 :box (:line-width 1)
                               :inherit default))))
              (widget-single-line-field ((t (:inherit widget-field))))
              ;; extra modules
@@ -496,7 +501,20 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (rcirc-prompt ((t (:foreground ,yellow))))
              (rcirc-bright-nick ((t (:foreground ,magenta))))
              (rcirc-server ((t (:foreground ,base1))))
-             (rcirc-timestamp ((t (:foreground ,base01)))))
+             (rcirc-timestamp ((t (:foreground ,base01))))
+             ;; ERC
+             (erc-input-face ((t (:foreground ,base01))))
+             (erc-keyword-face ((t (,@fmt-bldi ,@fg-yellow))))
+             (erc-my-nick-face ((t (:foreground ,blue))))
+             (erc-nick-default-face ((t (,@fmt-none ,@fg-cyan))))
+             (erc-notice-face ((t (,@fmt-none ,@fg-blue))))
+             (erc-timestamp-face ((t (:foreground ,base01))))
+             ;;font-latex
+             (font-latex-warning-face ((t (,@fg-red))))
+             (font-latex-sectioning-5-face ((t (,@fg-violet))))
+             ;;flyspell
+             (flyspell-incorrect ((t (,@fg-red))))
+             (flyspell-duplicate ((t (,@fg-yellow)))))
 
             ((foreground-color . ,(when (<= 16 (display-color-cells)) base0))
              (background-color . ,back)
